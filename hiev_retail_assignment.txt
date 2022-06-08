@@ -1,0 +1,79 @@
+
+1.)Count of unique customers and total sales for each age group and for a given month = Jan
+Hint : where month(txn_dt) = 1
+
+select age,count(distinct(Custno)),sum(Sales) as total from txn where month(txn_dt)='1' group by Age;
+
+
+A       686     908494                                                                                                                                                  
+B       1489    2565452                                                                                                                                                 
+C       2922    5358113                                                                                                                                                 
+D       3346    6694313                                                                                                                                                 
+E       2691    5521770                                                                                                                                                 
+F       2031    3797484                                                                                                                                                 
+G       1229    2135538                                                                                                                                                 
+H       594     1040837                                                                                                                                                 
+I       506     938571                                                                                                                                                  
+J       769     955095                                                                                                                                                  
+K       315     772812  
+
+
+2) Count of unique customers and total sales for one age group(A) for all products - [ sort data on totalsales desc- find top 10]
+
+
+select product,count(distinct(custno)) as unique_cust,sum(sales) as total from txn where trim(age) = 'A' group by product order by total desc limit 
+10;
+
+
+4711588210441   3       446185                                                                                                                                          
+8712045008539   15      38521                                                                                                                                           
+4710036008562   18      16137                                                                                                                                           
+4710036003581   58      15843                                                                                                                                           
+4718387034025   3       15178                                                                                                                                           
+4710628119010   4       14997                                                                                                                                           
+4710265849066   65      14440                                                                                                                                           
+20553418        4       14360                                                                                                                                           
+4710114128038   53      14114                                                                                                                                           
+4973167032060   8       13702                                                                                                                                           
+Time taken: 65.296 seconds, Fetched: 10 row(s)                                                                                                                          
+hive (training004)>    
+
+
+
+3) Area wise sales   
+
+select zipcode,sum(sales) from txn group by zipcode; 
+
+
+A       2344440                                                                                                                                                         
+B       2799090                                                                                                                                                         
+C       9866326                                                                                                                                                         
+D       5447881                                                                                                                                                         
+E       37994770                                                                                                                                                        
+F       31548341                                                                                                                                                        
+G       12593633                                                                                                                                                        
+H       5245595                                                                                                                                                         
+Time taken: 34.279 seconds, Fetched: 8 row(s)                                                                                                                           
+hive (training004)>   
+
+
+
+4) find top 10 viable products (prod which give highest profit)
+
+
+select product,max(sales -cost) as profit from txn group by product order by profit desc limit 10;  
+
+
+OK                                                                                                                                                                      
+4711588210441   12000                                                                                                                                                   
+4716859000851   3600                                                                                                                                                    
+8712045000151   2717                                                                                                                                                    
+20570477        2716                                                                                                                                                    
+7610053910800   2664                                                                                                                                                    
+20549817        2648                                                                                                                                                    
+4714008270605   2600                                                                                                                                                    
+4710628119010   2264                                                                                                                                                    
+4710628131012   2243                                                                                                                                                    
+20565466        2229                                                                                                                                                    
+Time taken: 61.916 seconds, Fetched: 10 row(s)                                                                                                                          
+hive (training004)>                                                                                                                                                     
